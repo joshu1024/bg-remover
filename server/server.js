@@ -2,6 +2,7 @@ import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import { connectToDB } from "./configs/connecttoDB.js";
+import useRouter from "./routes/userRoutes.js";
 
 dotenv.config();
 
@@ -14,6 +15,8 @@ app.use(express.json());
 app.get("/", (req, res) => {
   res.send("It is working");
 });
+
+app.use("/api/use", useRouter);
 
 app.listen(PORT, () => {
   connectToDB();
