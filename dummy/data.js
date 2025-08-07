@@ -1,0 +1,42 @@
+const dummyUsers = [
+  {
+    clerkId: "user_001",
+    email: "john.doe@example.com",
+    photo: "https://randomuser.me/api/portraits/men/1.jpg",
+    firstName: "John",
+    lastName: "Doe",
+    creditBalance: 10,
+  },
+  {
+    clerkId: "user_002",
+    email: "jane.smith@example.com",
+    photo: "https://randomuser.me/api/portraits/women/2.jpg",
+    firstName: "Jane",
+    lastName: "Smith",
+    creditBalance: 8,
+  },
+  {
+    clerkId: "user_003",
+    email: "ali.khan@example.com",
+    photo: "https://randomuser.me/api/portraits/men/3.jpg",
+    firstName: "Ali",
+    lastName: "Khan",
+    creditBalance: 15,
+  },
+  {
+    clerkId: "user_004",
+    email: "lucy.lee@example.com",
+    photo: "https://randomuser.me/api/portraits/women/4.jpg",
+    firstName: "Lucy",
+    lastName: "Lee",
+    creditBalance: 0,
+  },
+  {
+    clerkId: "user_005",
+    email: "emma.brown@example.com",
+    photo: "https://randomuser.me/api/portraits/women/5.jpg",
+    firstName: "Emma",
+    lastName: "Brown",
+    creditBalance: 5,
+  },
+];

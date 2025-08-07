@@ -2,23 +2,29 @@ import { Webhook } from "svix";
 import userModel from "../models/userModel.js";
 
 const clerkWebhooks = async (req, res) => {
+  const payload = req.body; // raw Buffer
+  const headers = {
+    "svix-id": req.headers["svix-id"],
+    "svix-timestamp": req.headers["svix-timestamp"],
+    "svix-signature": req.headers["svix-signature"],
+  };
+
+  const wh = new Webhook(process.env.CLERK_WEBHOOK_SECRET);
+
+  let evt;
   try {
-    console.log("🔔 Clerk webhook received:", req.body);
+    evt = wh.verify(payload, headers);
+    console.log("✅ Webhook verified:", evt.type);
+  } catch (err) {
+    console.error("❌ Webhook verification failed:", err.message);
+    return res.status(400).json({ error: "Invalid signature" });
+  }
 
-    // Verify webhook signature
-    const whook = new Webhook(process.env.CLERK_WEBHOOK_SECRET);
-    await whook.verify(JSON.stringify(req.body), {
-      "svix-id": req.headers["svix-id"],
-      "svix-timestamp": req.headers["svix-timestamp"],
-      "svix-signature": req.headers["svix-signature"],
-    });
-    console.log("✅ Webhook verified");
-    console.log("Webhook type:", type);
+  const { data, type } = evt;
 
-    const { data, type } = req.body;
-
+  try {
     switch (type) {
-      case "user.created": {
+      case "user.created":
         const userData = {
           clerkId: data.id,
           email: data.email_addresses?.[0]?.email_address || "no email",
@@ -27,18 +33,11 @@ const clerkWebhooks = async (req, res) => {
           photo: data.image_url || "",
         };
 
-        try {
-          await userModel.create(userData);
-          console.log("✅ User created:", userData.email);
-          res.status(201).json({ message: "User created" });
-        } catch (dbError) {
-          console.error("❌ MongoDB create error:", dbError.message);
-          res.status(500).json({ error: "Database error" });
-        }
-        break;
-      }
+        await userModel.create(userData);
+        console.log("✅ User created:", userData.email);
+        return res.status(201).json({ message: "User created" });
 
-      case "user.updated": {
+      case "user.updated":
         const updateData = {
           email: data.email_addresses?.[0]?.email_address || "",
           firstName: data.first_name || "",
@@ -46,40 +45,22 @@ const clerkWebhooks = async (req, res) => {
           photo: data.image_url || "",
         };
 
-        try {
-          await userModel.findOneAndUpdate({ clerkId: data.id }, updateData);
-          console.log("🔄 User updated:", data.id);
-          res.status(200).json({ message: "User updated" });
-        } catch (dbError) {
-          console.error("❌ MongoDB update error:", dbError.message);
-          res.status(500).json({ error: "Database error" });
-        }
-        break;
-      }
+        await userModel.findOneAndUpdate({ clerkId: data.id }, updateData);
+        console.log("🔄 User updated:", data.id);
+        return res.status(200).json({ message: "User updated" });
 
-      case "user.deleted": {
-        try {
-          await userModel.findOneAndDelete({ clerkId: data.id });
-          console.log("🗑️ User deleted:", data.id);
-          res.status(200).json({ message: "User deleted" });
-        } catch (dbError) {
-          console.error("❌ MongoDB delete error:", dbError.message);
-          res.status(500).json({ error: "Database error" });
-        }
-        break;
-      }
+      case "user.deleted":
+        await userModel.findOneAndDelete({ clerkId: data.id });
+        console.log("🗑️ User deleted:", data.id);
+        return res.status(200).json({ message: "User deleted" });
 
       default:
         console.warn("⚠️ Unhandled Clerk event type:", type);
-        res.status(200).json({ message: "Unhandled event type" });
-        break;
+        return res.status(200).json({ message: "Unhandled event type" });
     }
-  } catch (error) {
-    console.error(
-      "❌ Webhook verification failed or other error:",
-      error.message
-    );
-    res.status(400).json({ success: false, error: "Webhook error" });
+  } catch (dbError) {
+    console.error("❌ MongoDB error:", dbError.message);
+    return res.status(500).json({ error: "Database error" });
   }
 };
 
