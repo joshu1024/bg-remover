@@ -1,6 +1,3 @@
-# Ignore server-side code
-/server
-
 # Ignore root dependencies (if any)
 /node_modules
 /.pnp

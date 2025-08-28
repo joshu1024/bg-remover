@@ -15,10 +15,10 @@ export const AppContextProvider = (props) => {
 
   const backendUrl = import.meta.env.VITE_BACKEND_URL;
   const navigate = useNavigate();
-
+  const API = import.meta.env.VITE_API_URL;
   const loadCreditsData = async () => {
     try {
-      const { data } = await axios.get(backendUrl + "/api/user/credits", {
+      const { data } = await axios.get(`${API}/api/user/credits`, {
         headers: { token },
       });
       if (data.success) {
@@ -52,7 +52,7 @@ export const AppContextProvider = (props) => {
 
       image && formData.append("image", image);
       const { data } = await axios.post(
-        backendUrl + "/api/image/remove-bg",
+        `${API}/api/image/remove-bg`,
         formData,
         { headers: { token } }
       );
