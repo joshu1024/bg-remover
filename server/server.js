@@ -1,24 +1,32 @@
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
-import { connectToDB } from "./configs/connecttoDB.js";
-import useRouter from "./routes/userRoutes.js";
+import connectToDB from "./configs/connecttoDB.js";
+import userRoutes from "./routes/userRoutes.js";
+import bodyParser from "body-parser";
+import imageRouter from "./routes/imageRoutes.js";
+import fs from "fs";
 
 dotenv.config();
-
-const PORT = process.env.PORT || 4000;
+const PORT = process.env.PORT || 5000;
 const app = express();
 
-app.use(cors());
 app.use(express.json());
+app.use(cors());
+
+app.use("/api/user", userRoutes);
+app.use("/api/image", imageRouter);
 
 app.get("/", (req, res) => {
   res.send("It is working");
 });
 
-app.use("/api/use", useRouter);
+const uploadDir = "./uploads";
+if (!fs.existsSync(uploadDir)) {
+  fs.mkdirSync(uploadDir);
+}
 
 app.listen(PORT, () => {
+  console.log(`🚀 Server running at port ${PORT}`);
   connectToDB();
-  console.log(`server running at port ${PORT}`);
 });
