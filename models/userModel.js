@@ -1,11 +1,9 @@
 import mongoose from "mongoose";
 
 const userSchema = new mongoose.Schema({
-  clerkId: { type: String, required: true, unique: true },
+  name: { type: String, required: true },
   email: { type: String, required: true, unique: true },
-  photo: { type: String, required: true },
-  firstName: { type: String },
-  lastName: { type: String },
+  password: { type: String, required: true },
   creditBalance: { type: Number, default: 5 },
 });
 
