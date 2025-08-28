@@ -27,21 +27,25 @@
 
 | Layer        | Tech                                 |
 |--------------|--------------------------------------|
-| Frontend     | React (or Next.js if applicable)     |
+| Frontend     | React                                |
 | Backend      | Node.js + Express                    |
-| Styling      | Tailwind CSS / CSS Modules (if used) |
-| Hosting      | Vercel (Frontend), (Optional: Railway/Render for backend) |
-| Image AI     | remove.bg API / custom model / replicate.com / custom solution (adjust this to your actual model) |
+| Styling      | Tailwind CSS                         |
+| Hosting      | Vercel (Frontend), Render for (backend) |
+| Image AI     | ClipDrop API (used for background removal / image editing) |
+
 
 ---
 
 ## 📁 Project Structure
 
 bg-remover/
-├── client/ # Frontend (React or Next.js)
+├── client/ # Frontend (React )
 │ ├── public/
 │ └── src/
-│ ├── components/
+| ├── components/
+| ├── assets/
+| ├── auth/
+| ├── context/
 │ ├── pages/
 │ └── App.jsx
 │
@@ -49,7 +53,8 @@ bg-remover/
 │ ├── routes/
 │ ├── controllers/
 │ └── index.js
-│
+| |__ models.js
+│ |__ middleware.js
 ├── .gitignore
 └── README.md
 
