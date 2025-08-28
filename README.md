@@ -2,7 +2,16 @@
 
 **BG Remover** is a lightweight, fast, and accurate AI-powered web app that removes image backgrounds in one click. Designed for simplicity and speed, it allows users to upload an image and receive a clean cut-out with transparency — perfect for content creators, designers, and developers.
 
-![Demo Screenshot](https://bg-remover-xi-brown.vercel.app/demo-image.png) <!-- Optional: Replace with your actual hosted screenshot -->
+![Demo Screenshot]<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/ae825841-31bf-44ed-a880-10c2006620e3" />
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/fe3ebd47-065a-4a09-8f1e-3b2c9a89bb85" />
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/8e302bdf-9384-4a6f-a2fa-47cc6486e595" />
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/918814e9-61e9-4ba4-b76f-3138704f0fd3" />
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/91f5f0f2-e728-4959-8dc7-be5e5ad73aba" />
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/a7f362a7-7322-4503-9713-6ba992faaf76" />
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/dd2d5cf1-f589-46e1-8ab6-d57f1a4a7432" />
+
+
+
 
 ---
 
