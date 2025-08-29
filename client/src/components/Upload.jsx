@@ -7,7 +7,7 @@ const Upload = () => {
   const { removeBg } = useContext(AppContext);
   return (
     <div className="pb-16">
-      <h1 className="mb-12 sm:mb-20 text-center text-2xl font- md:text-3xl lg:text-4xl mt-4 bg-gradient-to-r from-gray-900 to-gray-400 bg-clip-text text-transparent py-6 md:py-16">
+      <h1 className="mb-12 sm:mb-20 text-center text-2xl font- md:text-3xl lg:text-4xl mt-4 bg-gradient-to-r from-gray-900 to-gray-400 bg-clip-text text-transparent py-6 md:py-7">
         See the Magic now
       </h1>
       <div className="flex justify-center items-center">
@@ -26,7 +26,6 @@ const Upload = () => {
           <img width={20} src={assets.upload_btn_icon} alt="" />
           <p className="text-white text-sm">Upload Your image</p>
         </label>
-        <p className="mx-4">or drag & drop here</p>
       </div>
     </div>
   );
